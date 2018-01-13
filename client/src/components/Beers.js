@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Card,  Image, Segment } from 'semantic-ui-react';
+import { Button, Card, Image, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import beer from '../images/beer.jpeg';
 
 class Beers extends React.Component {
   state = {
@@ -12,7 +13,7 @@ class Beers extends React.Component {
 componentDidMount() {
   axios.get(`/api/all_beers?per_page10&page=1`)
     .then( res => {
-        (console.log({ beers: res.data.entries, loaded: true }))
+        this.setState({ beers: res.data.entries, loaded: true })
     })
   }
 
@@ -30,11 +31,14 @@ displayEachBeer = (beer) => {
   return(
     <Segment>
       <Card Key={ beer.id }>
-        <Image src={beer.labels} />
+       <Image src={ beer.labels ? beer.labels.medium : beer } />
         <Card.Content>
           <Card.Header>
             {beer.name}
           </Card.Header>
+          <Card.Description>
+              {beer.description}
+          </Card.Description>
           <Link to={`/beer/${beer.name}`}>
             <Button> View Moar </Button>
           </Link>
@@ -51,6 +55,9 @@ render() {
     <div>
       <h1>List of Beers</h1>
           { this.state.loaded ? this.mapBeers() : null }
+          <Card.Group itemsPerRow={4}>
+            { this.mapBeers() }
+          </Card.Group>
     </div>
     )
   }

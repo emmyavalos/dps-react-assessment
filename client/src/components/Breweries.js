@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Card, Image, Segment } from 'semantic-ui-react';
+import { Button, Card, Container, Image, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import brew from '../images/brew.jpg';
 
 class Breweries extends React.Component {
   state = {
@@ -28,19 +29,27 @@ mapBreweries = () => {
 
 displayEachBrewery = (brewery) => {
   return(
-    <Segment>
-      <Card Key={ brewery.id }>
-        <Image src={brewery.images} />
-        <Card.Content>
-          <Card.Header>
-            {brewery.name}
-          </Card.Header>
-          <Link to={`/brewery/${brewery.name}`}>
-            <Button> View STUFF </Button>
-          </Link>
-        </Card.Content>
-      </Card>
-    </Segment>
+    <Container>
+      <Segment>
+        <Card Key={ brewery.id }>
+          <Image src={brewery.images ? brewery.images.medium : brew} />
+          <Card.Content>
+            <Card.Header>
+              {brewery.name}
+            </Card.Header>
+            <Card.Description>
+                {brewery.description}
+            </Card.Description>
+            <Link to={`/brewery/${brewery.name}`}>
+              <Button> View More </Button>
+            </Link>
+            <Link to={`/brewery/$brewery.website`}>
+              <Button>Website</Button>
+            </Link>
+          </Card.Content>
+        </Card>
+      </Segment>
+    </Container>
 
   )
 }
@@ -48,13 +57,13 @@ displayEachBrewery = (brewery) => {
 
 render() {
   return(
-    <Segment>
-      <h1>List of Breweries</h1>
-      <Card.Group itemsPerRow={4}>
-        { this.displayEachBrewery() }
-      </Card.Group>
-          { this.state.loaded ? this.mapBreweries() : null }
-    </Segment>
+    <div>
+        <h1>List of Breweries</h1>
+        { this.state.loaded ? this.mapBreweries() : null }
+        <Card.Group itemsPerRow={4}>
+          { this.mapBreweries() }
+        </Card.Group>
+    </div>
     )
   }
 }
