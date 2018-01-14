@@ -13,7 +13,6 @@ class Beers extends React.Component {
 componentDidMount() {
   axios.get(`/api/all_beers?per_page10&page=1`)
     .then( res => {
-      console.log(res.data)
         this.setState({ beers: res.data.entries, loaded: true })
     })
   }
@@ -55,7 +54,7 @@ render() {
   return(
     <div>
       <h1>List of Beers</h1>
-          { this.state.loaded ? this.mapBeers() : null }
+        { this.state.loaded ? this.mapBeers() : null }
           <Card.Group itemsPerRow={4}>
             { this.mapBeers() }
           </Card.Group>

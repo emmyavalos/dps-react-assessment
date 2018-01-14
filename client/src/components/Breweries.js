@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Card, Container, Image, Segment } from 'semantic-ui-react';
+import { Button, Card, Container, Grid, Image, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import brew from '../images/brew.jpg';
 
@@ -20,9 +20,9 @@ componentDidMount() {
 mapBreweries = () => {
     return this.state.breweries.map(brewery => {
         return(
-          <div>
+          <Card as={Link to={`/brewery/${brewery.name}`}}>
              {  this.displayEachBrewery(brewery)  }
-          </div>
+          </Card>
         )
       })
     }
@@ -33,20 +33,20 @@ displayEachBrewery = (brewery) => {
       <Segment>
         <Card Key={ brewery.id }>
           <Image src={brewery.images ? brewery.images.medium : brew} />
-          <Card.Content>
-            <Card.Header>
-              {brewery.name}
-            </Card.Header>
-            <Card.Description>
+            <Card.Content>
+              <Card.Header>
+                {brewery.name}
+              </Card.Header>
+              <Card.Description>
                 {brewery.description}
-            </Card.Description>
-            <Link to={`/brewery/${brewery.name}`}>
-              <Button> View More </Button>
-            </Link>
-            <Link to={`/brewery/$brewery.website`}>
-              <Button>Website</Button>
-            </Link>
-          </Card.Content>
+              </Card.Description>
+              <Link to={`/brewery/${brewery.name}`}>
+                <Button color = "palevioletred"> View More </Button>
+              </Link>
+              <Link to={`/brewery/${brewery.website}`}>
+                <Button>Website</Button>
+              </Link>
+            </Card.Content>
         </Card>
       </Segment>
     </Container>
@@ -57,16 +57,24 @@ displayEachBrewery = (brewery) => {
 
 render() {
   return(
-    <div>
+    <Container>
         <h1>List of Breweries</h1>
         { this.state.loaded ? this.mapBreweries() : null }
-        <Card.Group itemsPerRow={4}>
-          { this.mapBreweries() }
-        </Card.Group>
-    </div>
+        <Grid>
+          <Grid.Row >
+            <Card.Group itemsPerRow={4}>
+              { this.mapBreweries() }
+            </Card.Group>
+          </Grid.Row>
+        </Grid>
+    </Container>
     )
   }
 }
 
 
 export default Breweries;
+
+// <Link to={`/brewery/$brewery.website`}>
+//   <Button>Website</Button>
+// </Link>

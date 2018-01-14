@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Card, Container, Grid, Image, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import beer from '../images/beer.jpg';
+import brew from '../images/brew.jpg';
 
-class Beer extends React.Component {
+class Brewery extends React.Component {
   state = {
       brewery: [],
       loaded: false
@@ -15,9 +15,8 @@ class Beer extends React.Component {
       console.log(res.data)
       .then( res => {
           this.setState({ brewery: res.data.entries, loaded: true })
-    })
-  }
-
+      })
+    }
 }
 
-export default Beer;
+export default Brewery;
