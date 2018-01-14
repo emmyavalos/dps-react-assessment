@@ -20,7 +20,7 @@ componentDidMount() {
 mapBreweries = () => {
     return this.state.breweries.map(brewery => {
         return(
-          <Card as={Link to={`/brewery/${brewery.name}`}}>
+          <Card as={Link} to={`/brewery/${brewery.name}`}>
              {  this.displayEachBrewery(brewery)  }
           </Card>
         )

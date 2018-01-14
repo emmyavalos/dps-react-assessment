@@ -13,6 +13,7 @@ class Beers extends React.Component {
 componentDidMount() {
   axios.get(`/api/all_beers?per_page10&page=1`)
     .then( res => {
+      console.log(res.data)
         this.setState({ beers: res.data.entries, loaded: true })
     })
   }
