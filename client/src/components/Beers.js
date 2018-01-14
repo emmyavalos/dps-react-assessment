@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Button, Card, Image, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import beer from '../images/beer.jpeg';
+import generic from '../images/generic.jpg';
 
 class Beers extends React.Component {
   state = {
@@ -13,6 +13,7 @@ class Beers extends React.Component {
 componentDidMount() {
   axios.get(`/api/all_beers?per_page10&page=1`)
     .then( res => {
+      console.log(res.data)
         this.setState({ beers: res.data.entries, loaded: true })
     })
   }
@@ -31,7 +32,7 @@ displayEachBeer = (beer) => {
   return(
     <Segment>
       <Card Key={ beer.id }>
-       <Image src={ beer.labels ? beer.labels.medium : beer } />
+       <Image src={beer.labels ? beer.labels.medium : generic} />
         <Card.Content>
           <Card.Header>
             {beer.name}
