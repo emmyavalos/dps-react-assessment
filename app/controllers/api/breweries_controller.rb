@@ -10,4 +10,8 @@ class Api::BreweriesController < ApplicationController
   def by_name
     send_response(brew_client.breweries.all(name: params[:name], p: @page))
   end
+
+  def by_id
+    send_response(brew_client.breweries.all(ids: params[:id], p: @page))
+  end
 end

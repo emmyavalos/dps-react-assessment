@@ -40,7 +40,7 @@ displayEachBeer = (beer) => {
           <Card.Description>
               {beer.description}
           </Card.Description>
-          <Link to={`/beer/${beer.name}`}>
+          <Link to={`/beer/${beer.id}`}>
             <Button> View Moar </Button>
           </Link>
         </Card.Content>

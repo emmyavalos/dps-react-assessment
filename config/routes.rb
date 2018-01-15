@@ -4,10 +4,12 @@ Rails.application.routes.draw do
     get 'all_beers', to: 'beers#all'
     get 'beer/:name', to: 'beers#by_name'
     get 'random_beer', to: 'beers#random'
+    get 'mybeer/:id', to: 'beers#by_id'
 
     # Breweries
     get 'all_breweries', to: 'breweries#all'
     get 'brewery/:name', to: 'breweries#by_name'
+    get 'mybrewery/:id', to: 'breweries#by_id'
 
     # Search
     get 'search_all', to: 'brewery_db_search#all'

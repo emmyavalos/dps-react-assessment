@@ -20,8 +20,8 @@ class App extends Component {
           <Route exact path='/' component={Home} />
           <Route exact path='/beers' component={Beers} />
           <Route exact path='/breweries' component={Breweries} />
-          <Route exact path='/brewery/:name' component={Brewery} />
-          <Route exact path='/beer/:name' component={Beer} />
+          <Route exact path='/brewery/:id' component={Brewery} />
+          <Route exact path='/beer/:id' component={Beer} />
           <Route component={NoMatch} />
         </Switch>
       </Segment>

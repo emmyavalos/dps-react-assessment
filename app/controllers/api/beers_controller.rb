@@ -11,6 +11,10 @@ class Api::BeersController < ApplicationController
     send_response(brew_client.beers.all(name: params[:name], p: @page))
   end
 
+  def by_id
+    send_response(brew_client.beers.all(ids: params[:id], p: @page))
+  end
+
   def random
     send_response(brew_client.beers.random(p: @page))
   end
