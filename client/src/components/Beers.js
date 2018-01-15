@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Card, Image, Segment } from 'semantic-ui-react';
+import { Button, Card, Container, Grid, Image, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import generic from '../images/generic.jpg';
 
@@ -11,7 +11,7 @@ class Beers extends React.Component {
     }
 
 componentDidMount() {
-  axios.get(`/api/all_beers?per_page10&page=1`)
+  axios.get(`/api/all_beers?per_page50&page=1`)
     .then( res => {
       console.log(res.data)
         this.setState({ beers: res.data.entries, loaded: true })
@@ -21,31 +21,30 @@ componentDidMount() {
 mapBeers = () => {
     return this.state.beers.map(beer => {
         return(
-          <div>
-             {  this.displayEachBeer(beer)  }
-          </div>
+          <Card>
+             { this.displayEachBeer(beer) }
+          </Card>
         )
       })
     }
 
 displayEachBeer = (beer) => {
   return(
-    <Segment>
-      <Card Key={ beer.id }>
-       <Image src={beer.labels ? beer.labels.medium : generic} />
-        <Card.Content>
-          <Card.Header>
-            {beer.name}
-          </Card.Header>
-          <Card.Description>
-              {beer.description}
-          </Card.Description>
-          <Link to={`/beer/${beer.id}`}>
-            <Button> View Moar </Button>
-          </Link>
-        </Card.Content>
-      </Card>
-    </Segment>
+    <Container>
+      <Segment>
+        <Card Key={ beer.id }>
+         <Image src={beer.labels ? beer.labels.medium : generic} />
+          <Card.Content>
+            <Card.Header>
+              {beer.name}
+            </Card.Header>
+            <Link to={`/beer/${beer.id}`}>
+              <Button color = "teal"> View More </Button>
+            </Link>
+          </Card.Content>
+        </Card>
+      </Segment>
+    </Container>
 
   )
 }
@@ -53,16 +52,20 @@ displayEachBeer = (beer) => {
 
 render() {
   return(
-    <div>
-      <h1>List of Beers</h1>
-        { this.state.loaded ? this.mapBeers() : null }
-          <Card.Group itemsPerRow={4}>
-            { this.mapBeers() }
-          </Card.Group>
-    </div>
+    <Container>
+      <Segment textAlign='center'>
+        <h1>List of Beers</h1>
+          <Grid centered>
+              <Card.Group stackable itemsPerRow={3}>
+                { this.state.loaded ? this.mapBeers() : null }
+              </Card.Group>
+          </Grid>
+      </Segment>
+    </Container>
     )
   }
 }
+
 
 
 export default Beers;
