@@ -30,7 +30,7 @@ displayEachBrewery = (brewery) => {
   return(
     <Container>
       <Segment>
-        <Card Key={ brewery.id }>
+        <Card centered Key={ brewery.id }>
           <Image src={brewery.images ? brewery.images.square_medium : brew} />
             <Card.Content>
               <Card.Header>
@@ -53,8 +53,10 @@ displayEachBrewery = (brewery) => {
 render() {
   return(
     <Container>
-      <Segment textAlign='center'>
+      <Segment basic textAlign='center'>
         <h1>List of Breweries</h1>
+      </Segment>
+      <Segment basic>
         <Grid centered>
             <Card.Group stackable itemsPerRow={3}>
             { this.state.loaded ? this.mapBreweries() : null }
